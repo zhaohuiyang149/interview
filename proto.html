@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型链</title>
+</head>
+<body>
+    <script>
+        // 创建字面变量
+        var a0 = {name: 'a0'}
+        var a1 = new Object({name: 'a1'})
+        
+        // 通过构造函数创建对象
+        var Fun = function (name) {
+            this.name = name
+        }
+        var a2 = new Fun ('a2')
+
+        // 通过 Object.creat 方法创建对象
+        var p = {name: 'a3'}
+        var a3 = Object.create(p)
+
+        // 构造函数.prototype 是原型对象，原型对象.constructor 是构造函数，构造函数通过new方法可以生成一个对象，对象.__proto__为原型对象
+
+        console.log('左侧 === 原型对象 === 右侧', Fun.prototype === a2.__proto__)   // true
+        console.log('构造函数的原型对象.constructor === 构造函数本身', Fun.prototype.constructor === Fun)    // true
+
+        // 在构造函数原型对象上添加属性，该属性会添加在由这个构造函数创建的实例上
+
+        Fun.prototype.say = function () {
+            console.log('say hello')
+        }
+
+        console.log('a2', a2)    // say属性在a2的原型链上
+
+        var a4 = new Fun('a4')
+
+        console.log('a4', a4)    // say属性在a2的原型链上
+
+        // instanceof：在该实例对象的原型链上进行查找，直到找到Object.prototype，若有，则返回true，否次为false
+        
+        console.log('instanceof在原型链上进行查找', a2 instanceof Fun)      // true
+        console.log('instanceof在原型链上进行查找', a2 instanceof Object)    // true
+
+        // 上述两个均为true的根本原因是：a2.__proto__ === Fun.prototype、Fun.prototype.__proto__ === Object.prototype
+
+        // constructor：不涉及原型链类，不会在原型链上进行查找
+
+        console.log('constructor不会在原型链上进行查找', a2.constructor === Fun)      // true
+        console.log('constructor不会在原型链上进行查找', a2.constructor === Object)    // false
+        
+        // 模拟一个new运算符创建对象的整个过程
+        var new2 = function (Fun) {
+            var obj = Object.create(Fun.prototype)
+            var newobj = Fun.call(obj)
+            if (typeof newobj === 'object') {
+                return newobj
+            } else {
+                return obj
+            }
+        }
+
+        var a5 = new2(Fun)
+    </script>
+</body>
+</html>

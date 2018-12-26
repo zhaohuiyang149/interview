@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BFC</title>
+    <style>
+        section {
+            margin-bottom: 20px;
+        }
+        .margin {
+            overflow: hidden;
+            background-color: antiquewhite;
+        }
+        .margin > p {
+            background-color: aquamarine;
+            margin: 10px 0 20px 0;
+        }
+        .float {
+            background-color: beige;
+        }
+        .float .left {
+            float: left;
+            background-color: aqua;
+            height: 100px;
+            width: 100px;
+        }
+        .float .right {
+            height: 110px;
+            background-color: blueviolet;
+            overflow: auto;
+        }
+        .height {
+            overflow: auto;
+            background-color: aqua;
+        }
+        .height .float {
+            float: left;
+            font-size: 30px;
+            background-color: beige;
+        }
+    </style>
+</head>
+<body>
+    <!-- BFC元素在垂直方向上会发生边距重叠 -->
+    <!-- 如果不想让子元素边距重叠现象发生，则在这个子元素外边创建一个父元素，产生一个BFC -->
+    <section class="margin">
+        <p>1</p>
+        <div style="overflow: hidden;">
+            <p style="background-color: aquamarine; margin: 10px 0 20px 0;">2</p>
+        </div>
+        <p>3</p>
+    </section>
+    <!-- BFC不与float元素发生重叠 -->
+    <section class="float">
+        <div class="left">111</div>
+        <div class="right">222</div>
+    </section>
+    <!-- 计算BFC高度的时候，里边的浮动元素的高度也会计算在内 -->
+    <section class="height">
+        <div class="float">我是浮动元素</div>
+    </section>
+</body>
+</html>

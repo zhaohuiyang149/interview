@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>三栏布局--左中右</title>
+    <style>
+    html *{
+        padding: 0;
+        margin: 0;
+    }
+    .layout {
+        margin-bottom: 20px;
+    }
+    /* .layout article div {
+        min-height: 300px;
+    } */
+    .layout.float .left {
+        float: left;
+        width: 300px;
+        background-color: aqua;
+    }
+    .layout.float .right {
+        float: right;
+        width: 300px;
+        background-color: blueviolet;
+    }
+    .layout.float .center {
+        background-color: beige;
+    }
+    .layout.absolute .left {
+        position: absolute;
+        left: 0;
+        width: 300px;
+        background-color: aqua;
+    }
+    .layout.absolute .right {
+        position: absolute;
+        right: 0;
+        width: 300px;
+        background-color: blueviolet;
+    }
+    .layout.absolute .center {
+        position: absolute;
+        left: 300px;
+        right: 300px;
+        background-color: beige;
+    }
+    .layout.flexbox {
+        margin-top: 340px;
+    }
+    .layout.flexbox article {
+        display: flex;
+    }
+    .layout.flexbox .left {
+        width: 300px;
+        background-color: aqua;
+    }
+    .layout.flexbox .right {
+        width: 300px;
+        background-color: blueviolet;
+    }
+    .layout.flexbox .center {
+        flex: 1;
+        background-color:beige;
+    }
+    .layout.table .left-right-center {
+        width: 100%;
+        display: table;
+        /* height: 300px; */
+    }
+    .layout.table .left-right-center>div {
+        display: table-cell;
+    }
+    .layout.table .left {
+        width: 300px;
+        background-color: aqua;
+    }
+    .layout.table .right {
+        width: 300px;
+        background-color: blueviolet;
+    }
+    .layout.table .center {
+        background-color: beige;
+    }
+    .layout.grid .left-right-center {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 300px auto 300px;
+        /* grid-template-rows: 300px; */
+    }
+    .layout.grid .left {
+        background-color: aqua;
+    }
+    .layout.grid .right {
+        background-color: blueviolet;
+    }
+    .layout.grid .center {
+        background-color: beige;
+    }
+    </style>
+</head>
+<body>
+    <!-- 假设高度已知，请写出三栏布局，其中左栏、右栏宽度为300px，中间自适应。 五种方案：1、浮动；2、绝对定位 3、flex布局 4、table布局 5、grid布局-->
+    <section class="layout float">
+        <article class="left-right-center">
+            <div class="left">这是三栏布局中的左侧部分</div>
+            <div class="right">这是三栏布局中的右侧部分</div>
+            <div class="center">
+                <h1>浮动解决方案</h1>
+                <p>1.这是三栏布局中的中间部分</p>
+                <p>2.这是三栏布局中的中间部分</p>
+                <p>3.这是三栏布局中的中间部分</p>
+            </div>
+        </article>
+    </section>
+    <section class="layout absolute">
+        <article class="left-right-center">
+            <div class="left">这是三栏布局中的左侧部分</div>
+            <div class="center">
+                <h1>绝对定位解决方案</h1>
+                <p>1.这是三栏布局中的中间部分</p>
+                <p>2.这是三栏布局中的中间部分</p>
+                <p>3.这是三栏布局中的中间部分</p>
+            </div>
+            <div class="right">这是三栏布局中的右侧部分</div>
+        </article>
+    </section>
+    <section class="layout flexbox">
+        <article class="left-right-center">
+            <div class="left">这是三栏布局中的左侧部分</div>
+            <div class="center">
+                <h1>flex定位解决方案</h1>
+                <p>1.这是三栏布局中的中间部分</p>
+                <p>2.这是三栏布局中的中间部分</p>
+                <p>3.这是三栏布局中的中间部分</p>
+            </div>
+            <div class="right">这是三栏布局中的右侧部分</div>
+        </article>
+    </section>
+    <section class="layout table">
+        <article class="left-right-center">
+            <div class="left">这是三栏布局中的左侧部分</div>
+            <div class="center">
+                <h1>table定位解决方案</h1>
+                <p>1.这是三栏布局中的中间部分</p>
+                <p>2.这是三栏布局中的中间部分</p>
+                <p>3.这是三栏布局中的中间部分</p>
+            </div>
+            <div class="right">这是三栏布局中的右侧部分</div>
+        </article>
+    </section>
+    <section class="layout grid">
+        <article class="left-right-center">
+            <div class="left">这是三栏布局中的左侧部分</div>
+            <div class="center">
+                <h1>grid定位解决方案</h1>
+                <p>1.这是三栏布局中的中间部分</p>
+                <p>2.这是三栏布局中的中间部分</p>
+                <p>3.这是三栏布局中的中间部分</p>
+                <p>3.这是三栏布局中的中间部分</p>
+                <p>3.这是三栏布局中的中间部分</p>
+                <p>3.这是三栏布局中的中间部分</p>
+            </div>
+            <div class="right">这是三栏布局中的右侧部分</div>
+        </article>
+    </section>
+</body>
+</html>
+
+
+
+<!-- 备注：
+1、html的语义化：section artical
+2、每个方案的布局原理
+3、css基础：例如：display: table  table-cell  grid  flex
+4、每个方案的优缺点：
+flex布局： 兼容性IE9以下不支持，使用方便，可以保证三栏同高（相对完美）
+绝对定位： 脱离正常文档流，里边的所有子元素也均脱离文档流，使用方便、快捷
+浮动布局：脱离正常文档流，容易造成父元素高度塌陷，需要清除浮动，使用方便，兼容性好
+table布局： 三栏同高，使用不方便，兼容性好
+grid（网格）布局： 兼容性IE9以下不支持，可以保证三栏同高，代码相对简洁 -->
+
+
+<!-- 若要求三栏同高，则flex table  grid 布局可以满足要求，浮动布局则需要进行修改部分样式，对左侧和右侧两栏设置足够大的padding-bottom和相对应的负值的margin-bottom值，
+同时设置中间的部分margin: 0 300px;并将父元素的overflow:hidden即可满足三栏同高。 -->

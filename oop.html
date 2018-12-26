@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象</title>
+</head>
+<body>
+    <script>
+
+    // 类的声明
+
+    function Animal () {
+        this.name = 'Animal'
+    }
+
+    // ES6语法中class的声明
+
+    class Animal2 {
+        constructor () {
+            this.name = 'Animal2'
+        }
+    }
+
+    // 实例类的对象
+    var a0 = new Animal ()  // 若构造函数没有参数，则后边的括号可以省略
+    var a1 = new Animal2 ()   // 若构造函数没有参数，则后边的括号可以省略
+
+    // 实现继承的两种方式: 1.借助构造函数实现继承（原理：将父级的构造函数的this指向子构造函数的实例上去）      2.根据原型链实现继承
+
+    var Parent0 = function () {
+        this.name = 'parent'
+    }
+
+    var Child0 = function () {
+        Parent0.call(this)     // 将父级的构造函数的this指向子构造函数的实例上去
+        this.child = 'child'
+    }
+
+    Parent0.prototype.say = function () {
+        console.log('say hello')
+    }
+    // 上述方法是构造函数实现继承，该方法的缺点是在父级的prototype上添加的属性，并不能够在子构造函数的实例上进行继承
+
+    var Child1 = function () {
+        this.child = 'child'
+    }
+    var Parent1 = function () {
+        this.name = 'parent'
+        this.num = [1,2,3]
+    }
+
+    Child1.prototype = new Parent1 ()
+
+    console.log('Child1的实例为：', new Child1())
+
+    // new Child1().__proto__ === Child1.prototype
+
+    // 由于该方法的继承是通过原型链实现的，所以在父级构造函数的prototype上添加的属性，能够在子构造函数生成的实例上进行继承
+
+    // 该方法的缺点：在由子构造函数生成的不同实例中，若有其中一个实例对父级构造函数的属性进行操作，就会影响其他实例
+
+    var obj1 = new Child1()
+    var obj2 = new Child1()
+
+    obj1.num.push(4)
+
+    console.log(obj1, obj2)
+
+    // 在其中任意一个实例上对元素的属性进行修改，就会影响另外一个由同一构造函数生成的实例，原因：obj1.__proto === obj2.__proto，即obj1和obj2共享原型链了
+
+    // 无论是采用构造函数实现继承，还是原型链实现继承，都有一定的缺陷，所以接下来采用实现继承的方式是：两者组合的方式实现继承
+
+    var Parent2 = function () {
+        this.name = "Parent2"
+        this.num = [1,2,3]
+    }
+
+    var Child2 = function () {
+        Parent2.apply(this)
+        this.child = "Child2"
+    }
+
+    Child2.prototype = new Parent2()
+
+    console.log('由Child2构造函数生成的实例', new Child2())
+
+    // 验证在Parent2.prototype上新增属性，在Child2构造函数生成的实例是否会实现继承？ (会实现继承)
+    Parent2.prototype.say = "hello"
+    console.log('验证由Child2构造函数生成的实例是否有say属性', new Child2().say)    // hello 
+
+    // 若有Child2构造函数生成的不同实例中的其中一个实例对属性进行修改，是否会影响其他实例？  (无影响)
+    var obj3 = new Child2() 
+    var obj4 = new Child2()
+    obj3.num.push(4)
+    console.log(obj3.num, obj4.num)   // [1,2,3,4]   [1,2,3]
+
+    // 但是上述方案存在一个缺点，即对父构造函数实例化了两次，所以下面是对该方案的改进方案：
+
+    var Parent3 = function () {
+        this.name = 'Parent3'
+        this.num = [1,2,3]
+    }
+    var Child3 = function () {
+        Parent3.apply(this)
+        this.child = 'Child3'
+    }
+    Child3.prototype = Parent3.prototype
+
+    console.log('由Child3构造函数生成的实例', new Child3())
+
+    // 验证在Parent3.prototype上新增属性，在Child3构造函数生成的实例是否会实现继承？ (会实现继承)
+    Parent3.prototype.say = "hello"
+    console.log('验证由Child2构造函数生成的实例是否有say属性', new Child2().say)    // hello 
+
+    // 若有Child2构造函数生成的不同实例中的其中一个实例对属性进行修改，是否会影响其他实例？  (无影响)
+    var obj5 = new Child3() 
+    var obj6 = new Child3()
+    obj5.num.push(4)
+    console.log(obj5.num, obj6.num)   // [1,2,3,4]   [1,2,3]
+    console.log(obj5.__proto__.constructor)   // function () { this.name = 'Parent3' this.num = [1,2,3]}
+    console.log(new Parent3().__proto__.constructor)  // function () { this.name = 'Parent3' this.num = [1,2,3]}
+
+    // 但是上述方案依然存在一个问题，两个分别由父构造函数、子构造函数生成的实例的constructor均为父构造函数，无法判断实例的构造函数是哪个，所以下边是改进的方案
+
+    var Parent4 = function () {
+        this.name = 'Parent4'
+        this.num = [1,2,3]
+    }
+
+    var Child4 = function () {
+        Parent4.apply(this)
+        this.child = 'Child4'
+    }
+    Child4.prototype = Object.create(new Parent4())
+    Child4.prototype.constructor = Child4
+    console.log('由Child4构造函数生成的实例', new Child4())
+
+    var obj7 = new Child4() 
+    var obj8 = new Parent4()
+    console.log('obj7的构造函数', obj7.__proto__.constructor)   // Child4
+    console.log('obj8的构造函数', obj8.__proto__.constructor)   // Parent4
+
+    // 综上：上述方案解决了前四种方案的所有缺点，完美~~~
+    </script>
+</body>
+</html>
