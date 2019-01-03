@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跨域通信</title>
+</head>
+<body>
+    <script>
+        // 利用hash, 场景是当前页面 A 通过 iframe 或 frame 嵌入了跨域的页面 B
+        // 在 A 中的伪代码如下：
+        var B = document.getElementsByTagName('iframe')
+        B.src = B.src + '#' + 'data'
+        // 在 B 中的伪代码如下：
+        window.onhashchange = function () {
+            var data = window.location.hash
+        }
+
+        // postMessage
+        // 窗口 A (http: A.com) 向跨域的窗口 B (http: B.com) 发送数据
+        // 窗口 A (http: A.com)中伪代码如下：
+        Bwindow.postMessage('data', 'http: B.com')
+        // 在窗口B中监听：
+        window.addEventListener('message', function (event) {
+            console.log(event.source)     // Bwindow
+            console.log(event.origin)    // http: A.com
+            console.log(event.data)      // data!
+        }, false)
+    </script>
+
+</body>
+</html>

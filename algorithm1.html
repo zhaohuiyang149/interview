@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>算法题目1</title>
+</head>
+<body>
+    <p>1.给定一个数组a和一个长度值l，生成一个指定长度值为l的新数组b，要求b中的每一个元素都是从a中随机获取的，且数组元素不可重复。</p>
+    <p>2.使用js写一个栈结构。要求：这个栈满足两个调用者同时使用</p>
+    <p>3.找出数组中只出现一次的元素</p>
+    <p>4.对于一个给定的字符串s,计算出字典序最大的s的子序列</p>
+    <script>
+    function generate (arr, len) {
+        if (arr.length < len) {
+            return '原数组长度不足'
+        }
+        var newArr = [], newArrLength = 0, indexArr = [], indexArrLength = 1;
+        while (newArrLength < len && indexArrLength < arr.length) {
+            var index = Math.floor(Math.random() * (arr.length))
+            if (indexArr.indexOf(index) == -1) {
+                indexArr.push(index)
+                indexArrLength++
+                if (newArr.indexOf(arr[index]) == -1) {
+                    newArr.push(arr[index])
+                    indexArrLength++
+                }
+            }
+        }
+        if (newArr.length === len) {
+            return newArr
+        } else {
+            return '新数组长度不足'
+        }
+    }
+
+    function stack () {}
+    function once (arr) {
+        var newArr = []
+        for(var i = 0; i < arr.length; i++) {
+            if (newArr.indexOf(arr[i]) === -1) {
+                newArr.push(arr[i])
+            } else {
+                newArr = newArr.filter(item => {
+                    return item !== arr[i]
+                })
+            }
+        }
+        return newArr
+    }
+    function once2 (arr) {
+        var str = arr.join('')
+        var res = []
+        for (var i = 0; i < str.length; i++) {
+            var num = str.split(str[i]).length - 1
+            if (num === 1) {
+                res.push(parseFloat(str[i]))
+            }
+        }
+        return res
+    }
+    function maxChild (str) {
+        
+    }
+    </script>
+</body>
+</html>

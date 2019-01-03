@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this与箭头函数</title>
+    <style>
+    #box {
+        height: 100px;
+        width: 100px;
+        background-color: #eee;
+    }
+    </style>
+    <script>
+    // window.onload = () => {
+    //     var boxEle = document.getElementById('box')
+    //     boxEle.onclick = () => {
+    //         console.log(this)     // window
+    //         boxEle.style.backgroundColor = 'red'
+    //     }
+    // }
+    var name = 'bbbb'
+    var obj = {
+        name: 'aaa',
+        id: 'id001',
+        // say: ()=> {
+        //     console.log(this.name)   // 返回的是：window.name，即为bbbb
+        // }
+        say () {
+            console.log(this.name)     // 返回的是：aaa
+        }
+    }
+
+    var fun1 = function () {
+        console.log(arguments)     // arguments看起来为一个数组，但是不能往数组里push新元素
+    }
+    fun1(1, 2, 3)
+
+    var fun2 = (...rest) => {        // 使用扩展运算符将arguments转化为真正的数组，这样就可以push元素进去
+        rest.push(4)
+        console.log(rest)
+    }
+    fun2(1, 2, 3)
+
+    // var bb = 20
+
+    // function fun1 () {
+    //     setTimeout(() => {
+    //         console.log('箭头函数', this.bb)
+    //     })
+    // }
+
+    // function fun2 () {
+    //     setTimeout(function () {
+    //         console.log('普通函数', this.bb)
+    //     })
+    // }
+
+    // fun1.call({bb: 10})
+    // fun2.call({bb: 10})
+    // fun2()
+    </script>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>
