@@ -11,6 +11,10 @@
     <p>2.使用js写一个栈结构。要求：这个栈满足两个调用者同时使用</p>
     <p>3.找出数组中只出现一次的元素</p>
     <p>4.对于一个给定的字符串s,计算出字典序最大的s的子序列</p>
+    <p>5.使用递归，实现一个函数，给该函数一个DOM节点，函数访问其所有子元素（所有子元素，不仅仅是直接子元素），每次访问子元素的时候，并为其传一个callback</p>
+    <p>6.快速排序：时间复杂度？空间复杂度？</p>
+    <p>7.冒泡排序：时间复杂度？空间复杂度？</p>
+    <p>6.选择排序：时间复杂度？空间复杂度？</p>
     <script>
     function generate (arr, len) {
         if (arr.length < len) {
@@ -63,6 +67,57 @@
     function maxChild (str) {
         
     }
+    function dom (domTree, callback) {
+        callback(domTree)
+        let childTree = domTree.children
+        Array.prototype.forEach.apply(list, (item) => {
+            dom(item, callback)
+        })
+    }
+    function quickSort (arr) {
+        if (arr.length <= 1 ) {
+            return arr
+        }
+        var midIndex = Math.floor(arr.length / 2)
+        var mid = arr.splice('midIndex', 1)[0]
+        var left = []
+        var right = []
+        for(let i = 0; i< arr.length; i++) {
+            if (arr[i] <= mid) {
+                left.push(arr[i])
+            } else {
+                right.push(arr[i])
+            }
+        }
+        return quickSort(left).concat([mid], quickSort(right))
+    }
+    function bubbleSort (arr) {
+        for(var i = 0; i < arr.length; i++) {
+            for(var j = 0; j < arr.length - 1 -i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    var temp = arr[j + 1]
+                    arr[j + 1] = arr[j]
+                    arr[j] = temp
+                }
+            }
+        }
+        return arr
+    }
+    function selectionSort (arr) {
+        var minIndex = 0
+        for(var i = 0; i < arr.length - 1; i++) {
+            for(var j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j
+                }
+            }
+            temp = arr[i]
+            arr[i] = arr[minIndex]
+            arr[minIndex] = temp
+        }
+        return arr
+    }
+    
     </script>
 </body>
 </html>

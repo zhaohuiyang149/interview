@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function* gen () {
+            yield 1
+            yield 2
+            yield 3
+            // return 4
+        }  
+        var gen1 = gen()
+        console.log('gen1', gen1.next())      // {value:1, done: false}
+        console.log('gen1', gen1.next())      // {value:2, done: false}
+        console.log('gen1', gen1.next())      // {value:3, done: false}
+        // console.log('gen1', gen1.next())      // {value:4, done: true}
+        console.log('gen1', gen1.next())      // {value:undefined, done: true}
+
+        function* gen2 () {
+            let i = 0
+            for(; true; i++) {
+                let aa = yield i 
+                if (aa) {
+                    i = -1
+                }
+            }
+        }
+
+        var gen3 = gen2()
+        console.log('gen3', gen3.next())        // {value: 0, done: false}
+        console.log('gen3', gen3.next(true))           // {value: 0, done: false}
+        console.log('gen3', gen3.next(true))         // {value: 0, done: false}
+        console.log('gen3', gen3.next())         // {value: 1, done: false}
+
+
+        var json = {
+            *gen4 () {
+                yield 1
+                yield 2
+                yield 3
+            }
+        }
+        var ss = json.gen4()
+        console.log(ss.next())    // {value: 1, done: false}
+    </script>
+</body>
+</html>

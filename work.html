@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js基础第三次作业</title>
+</head>
+<body>
+    <script>
+        var User = {
+            count: 1, 
+            getCount: function() {
+                console.log('this', this)
+                return this.count
+            }
+        }    
+        console.log(User.getCount())         // 1
+
+        var func = User.getCount
+        console.log(func())             // undefined, this指向window
+
+        var length = 10
+        function fn () {
+            console.log('fn', this)
+            console.log(this.length)
+        }
+        var obj = {
+            length: 5,
+            showLength: function () {
+                console.log('showLength', this.length)
+            },
+            method: function(fn) {
+                console.log('method', this)
+                fn()
+                arguments[0]()
+            }
+        }
+        obj.method(fn, 1)         //  10    2
+        // obj.showLength()  // 5
+
+        function fn1() {
+            console.log(this.a)
+        }  
+        var obj1 = {
+            a:2,
+            fn:fn1
+        }
+        var a = "global"
+        setTimeout(obj1.fn,100)         // global
+    </script>
+</body>
+</html>

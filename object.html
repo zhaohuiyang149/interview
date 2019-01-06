@@ -60,7 +60,7 @@
         }
         var aperson = new Aperson ('asd', 10)
 
-         // 方法一：缺点：定义在构造函数的prototype上的属性不能被继承
+        // 方法一：缺点：定义在构造函数的prototype上的属性不能被继承
         function Bperson (name, age) {           
             Aperson.apply(this, arguments)
         }

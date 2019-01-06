@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise--catch</title>
+</head>
+<body>
+    <p>Promise.all：</p>
+    <p>Promise.resolve：</p>
+    <p>Promise.reject：</p>
+    <p>Promise.race：最先能执行的Promise的结果</p>
+    <script>
+        var pro1 = new Promise(function(resolve, reject) {
+            reject('aaa')
+        })
+        pro1.then(function(data) {
+            throw data
+        }).catch(function(data) {
+            console.log(data)
+        })
+        var pro2 = new Promise(function(resolve, reject) {
+            resolve('bbb')
+        })
+        
+        Promise.all([pro1, pro2]).then(function(data) {
+            console.log('data:', data)     // 两个Promise均为resolve时，才为resolve，返回的是一个数组
+        }, function(err) {
+            console.log('err:', err)       // 只要有一个Promise为reject时，返回reject的err
+        })
+
+        var pro3 = new Promise(function(resolve, reject) {
+            setTimeout(resolve, 500, '500')
+        })
+
+        var pro4 = new Promise(function(resolve, reject) {
+            setTimeout(reject, 100, '100')
+        })
+
+        Promise.race([pro3, pro4]).then(function(data) {
+            console.log('race:', data)
+        }, function (data) {
+            console.log('race1:', data)
+        })
+
+        Promise.reject('失败的信息').then(function(data) {
+            console.log('data:', data)
+        }, function (err) {
+            console.log('err:', err)
+        })
+
+        var pro5 = Promise.resolve('成功的信息')
+        Promise.resolve(pro5).then(function(data) {
+            console.log('data:', data)
+        })
+    </script>
+</body>
+</html>

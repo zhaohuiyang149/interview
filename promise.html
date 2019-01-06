@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise用法</title>
+</head>
+<body>
+    <input type="button" value="aaaa" id="btn">
+    <div id="box"></div>
+    <script>
+        var promise1 = new Promise (function (resolve, reject) {
+            var sucesee = {
+                name: 'aaa',
+                age: '20'
+            }
+            var fail = {
+                name: 'default',
+                age: 0
+            }
+            resolve(sucesee)
+            // reject(fail)
+        })
+        promise1.then(function(data) {
+            console.log('success', data)
+            return data.name
+        }, function(data) {
+            console.log('fail', data)
+        }).then(function(value) {
+            console.log('value', value)
+        })
+        var ajax = function (url, fnsucc, fnfail) {
+            var Aajax = new XMLHttpRequest()
+            Aajax.open('GET', url, true)
+            Aajax.send()
+            Aajax.onload = function () {
+                if (Aajax.readyState === 4 && (Aajax.status === 200 || Aajax.status === 206)) {
+                    fnsucc(Aajax.responseText)
+                } else {
+                    fnfail(Aajax.status)
+                }
+            }
+        }
+        window.onload = function () {
+            var btn = document.getElementById('btn')
+            var box = document.getElementById('box')
+            btn.onclick = function () {
+                var pp1 = new Promise (function(resolve, reject) {
+                    ajax('a.txt', function(text) {
+                        resolve(text)
+                    }, function (err) {
+                        reject(err)
+                    })
+                })
+                pp1.then(function(data) {
+                    box.innerHTML = data
+                }, function (err) {
+                    box.innerHTML = err
+                })
+            }
+        }
+    </script>
+</body>
+</html>

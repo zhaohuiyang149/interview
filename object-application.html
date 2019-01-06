@@ -5,9 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>面向对象的应用</title>
+    <style>
+        .box input.on {
+            background-color: cornflowerblue;
+        }
+        .box > div {
+            height: 100px;
+            width: 100px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <p>队列</p>
     <p>选项卡</p>
+    <div id='box' class="box">
+        <input type="button" value="aaa" class="on">
+        <input type="button" value="bbb">
+        <input type="button" value="ccc">
+        <div style="display: block;">aaa</div>
+        <div>bbb</div>
+        <div>ccc</div>
+    </div>
+    <div id='box2' class="box">
+        <input type="button" value="aaa" class="on">
+        <input type="button" value="bbb">
+        <input type="button" value="ccc">
+        <div style="display: block;">aaa</div>
+        <div>bbb</div>
+        <div>ccc</div>
+    </div>
+    <script>
+    class Queue {
+        constructor (arr = []) {
+            this.value = [...arr]
+        }
+        push (num) {
+            this.value.push(num)
+            return this.value.length
+        }
+        shift () {
+            let num = this.value[0]
+            this.value.shift()
+            return num
+        }
+    }
+    var queue = new Queue([2,3,4,5])
+
+    class Tab {
+        constructor (id) {
+            this.iNow = 0
+            this.oBox = document.getElementById(id)
+            this.aBtn = this.oBox.getElementsByTagName('input')
+            this.aDiv = this.oBox.getElementsByTagName('div')
+            this.init()
+        }
+        init () {
+            for(let i = 0; i < this.aBtn.length; i++) {
+                this.aBtn[i].onclick = () => {
+                    this.iNow = i
+                    this.hide()
+                    this.show(i)
+                }
+            }
+        }
+        hide () {
+            for(let i = 0; i < this.aBtn.length; i++) {
+                this.aBtn[i].className = ''
+                this.aDiv[i].style.display = 'none'
+            }
+        }
+        show (i) {
+            this.aBtn[i].className = 'on'
+            this.aDiv[i].style.display = 'block'
+        }
+    }
+
+    class AutoTab extends Tab {
+        constructor (id) {
+            super (id)
+        }
+        next () {
+            setInterval(() => {
+                this.iNow ++
+                if (this.iNow === this.aBtn.length) {
+                    this.iNow = 0
+                }
+                this.hide()
+                this.show(this.iNow)
+            }, 1000)
+
+            // this.iNow ++
+            // if (this.iNow === this.aBtn.length) {
+            //     this.iNow = 0
+            // }
+            // this.hide()
+            // this.show(this.iNow)
+        }
+    }
+    window.onload = function () {
+        new Tab('box')
+        var aa = new AutoTab('box2')
+        aa.next()
+    }
+
+    var arr1 = [1,2,3,4]
+    var arr2 = Array.from(arr1)
+    arr2.push(5)
+
+    </script>
 </body>
 </html>
