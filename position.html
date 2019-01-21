@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>position的五个属性值解析</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .div {
+            position: relative;
+            overflow: auto;
+            height: 700px;
+            padding: 20px;
+        }
+        .div div {
+            height: 100px;
+            width: 100px;
+            color: #fff;
+            margin: 20px;
+        }
+        .div1 {
+            background-color: #000;
+            position: static;
+        }
+        .div2 {
+            background-color: #300;
+            position: relative;
+        }
+        .div3 {
+            background-color: #600;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .div4 {
+            background-color: #900;
+            position: inherit;
+        }
+        .div5 {
+            background-color: #c00;
+            position: fixed;
+        }
+        .div6 {
+            background-color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>position: static表示默认值，没有定位，元素出现在正常的流中。此时会忽略top、bottom、left、right、z-index的声明。 </p>
+        <p>position: relative表示生成相对定位的元素，相对于其正常位置进行定位。 </p>
+        <p>position: absolute表示生成绝对定位的元素，相对于页面上static定位以外的第一个父元素进行定位。元素的位置通过top、bottom、left、right进行规定。</p>
+        <p>position: fixed表示生成绝对定位元素，相对于浏览器窗口进行定位。元素通过top、bottom、left、right进行规定。</p>
+        <p>position: inherit表示规定元素从父元素继承position属性的值。</p>
+    </div>
+    <div class="div">
+        <div class="div1">div1</div>
+        <div class="div2">div2</div>
+        <div class="div2">div2</div>
+        <div class="div3">div3</div>
+        <div class="div4">div4</div>
+        <div class="div5">div5</div>
+        <div class="div6">div6</div>
+    </div>
+</body>
+</html>
