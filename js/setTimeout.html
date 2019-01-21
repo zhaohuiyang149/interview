@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>setTimeout函数</title>
+</head>
+<body></body>
+<script>
+    // function fun (fun1, timer, interval) {
+    //     // 方法一
+    //     for(let i = 0; i < timer; i++) {
+    //         setTimeout(function() {
+    //             fun1()
+    //         }, interval*i)
+    //     }
+    //     // 方法二
+    //     var i = 0
+    //     var setTime = setInterval(() => {
+    //         if (i < timer) {
+    //             fun1()
+    //             i++
+    //         } else {
+    //             clearInterval(setTime)
+    //         }
+    //     }, interval)
+    // }
+    // var fun1 = function () {
+    //     console.log('11')
+    // }
+    // fun(fun1, 4, 3000)
+
+    // xiaomi
+
+    // for(var i = 0; i < 5; i++) {
+    //     console.log(i)
+    // }
+
+    // 打印输出： 0 1 2 3 4
+
+    // for(var i = 0; i < 5; i++) {
+    //     setTimeout(() => {
+    //         console.log(i)
+    //     }, 1000*i);
+    // }
+
+    // 打印输出： 5 （1秒之后） 5  （1秒之后） 5 （1秒之后） 5 （1秒之后） 5
+
+    for(var i = 0; i< 5; i++) {
+        (function(i) {
+            console.log(i)
+            setTimeout((i) => {
+                console.log(i)
+            }, i * 1000)
+        })(i)
+    }
+
+    // 打印输出： undefined （1秒之后） undefined  （1秒之后） undefined （1秒之后） undefined （1秒之后） undefined
+</script>
+</html>

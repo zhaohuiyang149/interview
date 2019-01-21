@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>es6</title>
+</head>
+<body>
+    <div v-html></div>
+    <script>
+    // var json = {a: 'aa', b: 'bb', c: 'cc'}
+    // for (var name in json) {
+    //     console.log('name', name)
+    // }
+
+    // var Person = class {
+    //     constructor (name, age) {
+    //         this.name = name
+    //         this.age = age
+    //     }
+    //     say () {
+    //         console.log('say hello')
+    //     }
+    // }
+    // var obj1 = new Person('aaa', 15)
+    // let {a: m} = {a: 1} 
+    // console.log('m', m)
+    let {a=[], b=[], c=[], d='hello' } = {c: [], d: ''}
+    a.push(1)
+    b.push(1)
+    c.push(1)
+    console.log(a)       // 1
+    console.log(b)       // 1
+    console.log(c)       // 1
+    console.log(d)       // ''
+    console.log({c:[], d: ''})    // {c:[], d: ''}
+    </script>
+</body>
+</html>

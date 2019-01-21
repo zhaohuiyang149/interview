@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css练习</title>
+    <style>
+    .xm-box {
+        height: 0;
+        width: 0;
+        border-top: 0;
+        border-left: 100px solid transparent;
+        border-bottom: 100px solid rebeccapurple;
+        border-right: 100px solid transparent;
+    }
+    </style>
+</head>
+<body>
+    <div class="xm-box"></div>
+    <script>
+        function Object1 (name, age) {
+            this.name = name
+            this.age = age
+        } 
+        function Object2 (job) {
+            this.job = job
+        } 
+        var aa = new Object1 ('aa', 10)
+        var bb = new Object2 ('student')
+        bb.__proto__ = new Object1 ('bb', 20)
+
+        var cc1 = {name: 'cc1'}
+        var cc2 = new Object({name: 'cc2'})
+        var cc3 = Object.create({name: 'cc3'})
+
+        class Object3 {
+            constructor (name, age) {
+                this.name = name
+                this.age = age
+            }
+            job (job) {
+                console.log(job)
+            }
+        }
+        var dd = new Object3 ('cc', 20)
+
+        function fun () {
+            var aa = 1
+            var bb = 2
+            function fun1 () {
+                console.log('aa:', aa)
+            }
+            return fun1
+        }
+
+        var arr1 = new Array([30,10,12,9])
+    </script>
+</body>
+</html>

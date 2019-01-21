@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>inline/inline-block/block区别</title>
+</head>
+<body>
+    <div>
+        <div>块级元素（block）的特点：
+            <p style="color: tomato"><strong>常见的块级元素：div p h1-h6 ul li ol dl table address blockquote form</strong></p>
+            <p>1、每个元素都从新的一行开始，并且其后的元素也是另起一行。</p>
+            <p>2、元素的高度、宽度、行高以及顶和底边距都可以设置。</p>
+            <p>3、元素的宽度在不设置的情况下，是它本身父容器的100%（和父元素宽度一致），除非设定一个宽度。</p>
+            <!-- 下面这个div元素的宽度为父元素div的宽度，但是其高度为0 -->
+            <div></div>
+        </div>
+        <div>块状内联元素（inline-block）的特点：
+            <p style="color: tomato"><strong>常见的行内块元素：img input </strong></p>
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548005651916&di=c680941ec4cb8ce03689f2d9af28da3e&imgtype=0&src=http%3A%2F%2Fyuedu.sdnews.com.cn%2Fws%2F201401%2FW020130625537813458079.jpg">
+            <input type="text">
+            <p>1、和其他元素都在一行上</p>
+            <p>2、元素的高度、宽度、行高以及顶和底边距都可以设置。</p>
+        </div>
+        <div>内联元素（inline）的特点：
+            <p style="color:tomato;"><strong>常见的内联元素：span a strong label em</strong></p>
+            <span>11111</span>
+            <span>22222</span>
+            <span>33333</span>
+            <p>1、和其他元素都在一行上。</p>
+            <p>2、元素的高度、宽度以及顶和底边距不可以设置。(左右边距依然存在、行高依然生效)</p>
+            <p>3、元素的宽度就是它包含的文字或者图片的宽度，不可改变。</p>
+        </div>
+    </div>
+</body>
+</html>

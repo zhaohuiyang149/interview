@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise与setTimeOut</title>
+</head>
+<body></body>
+<script>
+// setTimeout(()=> console.log('1'))
+// console.log('2')
+// new Promise(function(resolve, reject) {
+//     console.log('3')
+//     resolve()
+// }).then(function() {
+//     console.log('4')
+// }).then(function() {
+//     console.log('5')
+// }) 
+
+// 打印出来的顺序为：2  3  4   5   1
+
+// console.log('begin')
+// setTimeout(() => {
+//     console.log('setTimeout1')
+//     Promise.resolve(1).then(() => {
+//         console.log('Promise1')
+//         setTimeout(() => {
+//             console.log('Promise1 && Promise2')
+//         })
+//     }).then(() => {
+//         console.log('Promise2')
+//     })
+// }, 0)
+// console.log('end')
+
+// 打印出来的顺序为：begin  end   setTimeout1    Promise1    Promise2     Promise1 && Promise2
+
+// console.log('sohu begin')
+// new Promise(function(reslove, reject) {
+//     console.log('sohu 1')
+//     reslove('11')
+// }).then(function() {
+//     console.log('sohu 2')
+// })
+
+// Promise.resolve(1).then(function() {
+//     console.log('sohu 3')
+// })
+
+// setTimeout(function() {
+//     console.log('sohu 4')
+// }, 0)
+
+// console.log('sohu end')
+
+
+// 打印顺序： sohu begin   sohu 1   sohu end    sohu 2   sohu 3   sohu 4
+
+// 小米
+setTimeout(() => {
+    console.log('1')
+    new Promise(resolve => {
+        resolve()
+    }).then(() => {
+        console.log('2')
+    })
+}, 0)
+
+setTimeout(() => {
+    console.log('3')
+    new Promise(resolve => {
+        resolve()
+    }).then(() => {
+        console.log('4')
+    })
+}, 0)
+
+// 打印顺序： 1  2   3   4
+</script>
+</html>

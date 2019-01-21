@@ -15,6 +15,10 @@
     <p>6.快速排序：时间复杂度？空间复杂度？</p>
     <p>7.冒泡排序：时间复杂度？空间复杂度？</p>
     <p>6.选择排序：时间复杂度？空间复杂度？</p>
+    <p>8.数组有序重复元素去重遍历一遍的算法</p>
+    <p>9.合并两个有序数组</p>
+    <p>10.将二维数组转化为一维数组</p>
+    <p>11.html图片的顺序加载</p>
     <script>
     function generate (arr, len) {
         if (arr.length < len) {
@@ -117,7 +121,50 @@
         }
         return arr
     }
-    
+    function uniq (arr) {
+        var len = arr.length
+        for(let i = 0; i < len - 1; i++) {
+            if (arr[i] === arr[i+1]) {
+                arr.splice(i+1, 1)
+            }
+        }
+        return arr
+    }
+    function mergeArray (arr1, arr2) {
+        let index1 = 0
+        let index2 = 0
+        let newArray = []
+        while(index1 < arr1.length && index2 < arr2.length) {
+            if (arr1[index1] >= arr2[index2]) {
+                newArray.push(arr2.slice(index2, index2+1)[0])
+                index2 ++
+            } else {
+                newArray.push(arr1.slice(index1, index1+1)[0])
+                index1 ++
+            }
+        }
+        while(index1 < arr1.length) {
+            newArray.push(arr1.slice(index1, index1+1)[0])
+            index1 ++
+        }
+        while(index2 < arr2.length) {
+            newArray.push(arr2.slice(index2, index2+1)[0])
+            index2 ++
+        }
+        return newArray
+    }
+    var arr = [[1,2,3], [3,4], [5]]   
+    console.log([].concat.apply([],arr))
+    function loadImg (imgArray, index) {
+        index = index || 0
+        if (imgArray.length < 1 && imgArray.length > index) {
+            var img = new Img ()
+            img.onload = function () {
+                loadImg(imgArray, index + 1)
+            }
+            img.src = imgArray[index]
+        } 
+    }
     </script>
 </body>
 </html>
