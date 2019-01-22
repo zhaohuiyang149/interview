@@ -8,6 +8,37 @@
     <link rel="stylesheet" href="demo.css">
 </head>
 <body>
+    <section>
+        <article>
+            <h1>transform（表示变形）的属性：</h1>
+            <p>rotate：旋转，中心为原点，例如：rotate(180deg)，即代表以中心为原点旋转180度。</p>
+            <p>skew：扭曲，倾斜，skew(  x,y)  shewX(x)  skewY(y)</p>
+            <p>scale：缩放，scale(x, y) scaleX(x) scaleY(y) 例如：scale(2.0)，即代表整体放大2倍，注意：必须写为2.0，不能写成2</p>
+            <p>translate：变动、移动，translate(x, y) translateX(x) translateY(y) 例如：translate(50%, 50%)，即代表x轴方向上向右移动50%，y轴向上移动50%</p>
+        </article>
+        <article>
+            <h1>transition（表示转换）的属性：(允许css属性在一定的时间区间内平滑的渡过)</h1>
+            <p>transition-property：是用来指定当元素其中一个属性改变时执行transition效果，其主要有以下几个值：none(没有属性改变)；all（所有属性改变）这个也是其默认值；indent（元素属性名）。当其值为none时，transition马上停止执行，当指定为all时，则元素产生任何属性值变化时都将执行transition效果，ident是可以指定元素的某一个属性值。</p>
+            <p>transition-duration：是用来指定元素,转换过程的持续时间</p>  
+            <p>transition-timing-function：linear(线性)、ease(逐渐慢下来)、ease-in(逐渐加速)、ease-out(逐渐减速)、ease-in-out(先加速后减速)</p>
+            <p>transition-delay：是用来指定一个动画开始执行的时间，也就是说当改变元素属性值后多长时间开始执行transition效果。默认值为：0</p>
+            <p>例如：transition: height .5s linear, width .5s linear; transition: transform .7s ease-in-out;</p>          
+        </article>
+        <article>
+            <h1>animation(表示动画)的属性：(animation无法单独担当起实现动画的效果。承载动画的另一个属性——@keyframes)</h1>
+            <p>
+                <ul>
+                    <li>创建动画的原理是，将一套 CSS 样式逐渐变化为另一套样式</li>
+                    <li>通过 @keyframes 规则，能够创建动画。</li>
+                    <li>@keyframes定义一个动画，并定义具体的动画效果，比如是放大还是位移等等</li>
+                    <li>@keyframes 它定义的动画并不直接执行，需要借助animation来运转</li>
+                    <li>在动画过程中，能够多次改变这套 CSS 样式</li>
+                    <li>以百分比来规定改变发生的时间，或者通过关键词 "from" 和 "to"，等价于 0% 和 100%</li>
+                </ul>
+            </p>
+            <p>例子：animation: gif 1.4s infinite linear; </p>
+        </article>
+    </section>
     <!-- demo1：扑克牌翻转 -->
     <div class="container">
         <div class="card">

@@ -156,10 +156,10 @@
     height: 30px
 }
 @keyframes spin{
-    0% {
+    from {
         transform: rotate(-360deg);
     }
-    100%{
+    to {
         transform: rotate(0);
     }
 }
