@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>proxy</title>
+</head>
+<body>
+    <script>
+    let person = {
+        name: 'aaa',
+        age: 3
+    }    
+    let proxy1 = new Proxy(person, {
+        get (target, prototype) {
+            if (target[prototype]) {
+                return target[prototype]
+            } else {
+                return '该属性不存在'
+            }
+        }
+    })
+    let proxy2 = Object.create(proxy1)    // 可以实现继承
+
+    let proxy3 = new Proxy(person, {
+        set: function(target, key, value) {
+            if (key === 'sex') {
+                if (!(value === 'man' || value === 'women')) {
+                    throw new Error('输入的性别有误~~') 
+                } else {
+                    person[key] = value
+                }
+            }
+        }
+    })
+    
+    </script>
+</body>
+</html>

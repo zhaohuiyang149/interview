@@ -1,0 +1,165 @@
+.container {
+    position: relative;
+    height: 500px;
+    width: 500px;
+    border: 1px solid #000;
+    background-color: #eee;
+}
+.card {
+    width: 200px;
+    height: 300px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    perspective: 1000px;
+}
+.card > div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    transition: 1s;
+    border-radius: 8px;
+}
+.card > .card-front {
+    background-color: #88DEFB;
+}
+.card > .card-back {
+    background-color: #fff;
+    transform: rotateY(180deg);
+}
+.card:hover .card-front {
+    transform: rotateY(180deg);
+}
+.card:hover .card-back {
+    transform: rotateY(360deg);
+}
+/* demo2样式 */
+.container.small {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.spinner::after {
+    content: '';
+    display: block;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-top: 1px solid #88DEFB;
+    border-bottom: 1px solid transparent;
+    animation: spinner .7s infinite linear;
+}
+
+@keyframes spinner {
+    form {
+        transform: rotate(0)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+/* demo3样式 */
+.three-bounce > div, .three-bounce::before, .three-bounce::after {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: #88DEFB;
+    animation: bouncedeley 1.4s infinite ease-in-out;
+}
+.three-bounce::before {
+    content: '';
+    animation-delay: -.5s;
+}
+.three-bounce::after {
+    content: '';
+}
+.three-bounce > div {
+    animation-delay: -.25s;
+}
+@keyframes bouncedeley {
+    0%, 100%, 80% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* demo4样式 */
+.three-impulse > div, .three-impulse::before, .three-impulse::after {
+    display: inline-block;
+    height: 20px;
+    width: 4px;
+    margin: 0 2px;
+    background-color: #88DEFB;
+    animation: impulse .75s infinite linear;
+}
+.three-impulse > div {
+    animation-delay: -.5s;
+}
+.three-impulse::before {
+    animation-delay: -.25s;
+    content: '';
+}
+.three-impulse::after {
+    content: '';
+}
+@keyframes impulse {
+    0%, 100% {
+        transform: scale(1, .4);
+        opacity: .2;
+    }
+    50% {
+        transform: scale(1, 1);
+        opacity: 1; 
+    }
+}
+
+/* demo5样式 */
+.core, .electron{
+    background-color:#88DEFB;
+}
+.core, .electron, .orbit {
+    display: inline-block;
+    border-radius: 50%;
+}
+.electron {
+    position: absolute;
+    left: 55px;
+    top: 0;
+    width: 15px;
+    height: 15px;
+}
+.orbit {
+    position:relative;
+    width: 80px;
+    height: 80px;
+    border: 2px solid #88DEFB;
+    animation:spin 2s infinite linear;
+}
+.core{
+    margin-top: 25px;
+    margin-left: 25px;
+    width: 30px;
+    height: 30px
+}
+@keyframes spin{
+    0% {
+        transform: rotate(-360deg);
+    }
+    100%{
+        transform: rotate(0);
+    }
+}

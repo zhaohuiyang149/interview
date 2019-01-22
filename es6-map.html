@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>es6 map</title>
+</head>
+<body>
+    <script>
+    var map1 = new Map()
+    map1.set('name', 'aaaa')
+    map1.set('age', 15)
+
+    console.log(map1)
+    console.log(map1.get('name'))
+    console.log(map1.delete('name'))
+    console.log(map1.has('name'))
+
+    var map2 = new Map()
+    map2.set(true, 7)
+    map2.set({name: 'bbb'}, ['abc'])
+    console.log(map2)
+    console.log([...map2])
+    
+    </script>
+</body>
+</html>

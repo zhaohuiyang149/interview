@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BFC</title>
     <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
         section {
             margin-bottom: 20px;
         }
@@ -40,9 +44,28 @@
             font-size: 30px;
             background-color: beige;
         }
+        .margin-negative {
+            overflow: auto;
+        }
+        .margin-negative p:nth-child(2) {
+            margin: -20px 0;
+            background-color: #900;
+            height: 80px;
+        }
+        .margin-negative p:first-child {
+            margin: 0 0 -30px 0;
+            background-color: #f00;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
+    <h1>BFC的渲染机制：</h1>
+    <p>（1）BFC是一个独立的容器，外边的元素不会影响里边的元素，里边的元素也不会影响外边的元素；</p>
+    <p>（2）BFC内部的元素在垂直方向上会发生margin重叠；（若两个元素的margin均为正值，则取margin较大者为两个元素之间的magin值，若magin为一正一负，则为两个元素的magin值相加，若magin均为负值，则取绝对值最大值）</p>
+    <p>（3）计算BFC区域的高度时，里边浮动元素的高度也会计算在内。（清除浮动的其中一种方法：在父元素上设置overflow: auto，即可创建一个BFC，防止父元素高度塌陷）</p>
+    <p>（4）BFC区域不会与浮动元素发生重叠。</p>
+
     <!-- BFC元素在垂直方向上会发生边距重叠 -->
     <!-- 如果不想让子元素边距重叠现象发生，则在这个子元素外边创建一个父元素，产生一个BFC -->
     <section class="margin">
@@ -60,6 +83,11 @@
     <!-- 计算BFC高度的时候，里边的浮动元素的高度也会计算在内 -->
     <section class="height">
         <div class="float">我是浮动元素</div>
+    </section>
+    <!-- 在BFC内部的子元素在垂直方向上会发生margin重叠，若margin为负值，则两者之间的margin值为两个元素的magin值相加 -->
+    <section class="margin-negative">
+        <p>12121</p>
+        <p>232323</p>
     </section>
 </body>
 </html>

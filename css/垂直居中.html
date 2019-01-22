@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css的垂直居中</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .box {
+            position: relative;
+            height: 500px;
+            width: 500px;
+            border: 1px solid #000;
+            margin: auto;
+        }
+        .child1 {
+            height: 100px;
+            width: 100px;
+            background-color: #aaa;
+            top: 50%;
+            left: 50%;
+            position: relative;
+            margin: -50px -50px;
+        }
+        .child2 {
+            background-color: #aaa;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            position: relative;
+        }
+        .box1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .child3 {
+            height: 100px;
+            width: 100px;
+            background-color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <!-- 已知元素的高度，垂直居中 -->
+    <!-- <div class="box">
+        <div class="child1">元素高度已知</div>
+    </div> -->
+    <!-- 元素高度未知，垂直居中 -->
+    <!-- <div class="box">
+        <div class="child2">
+            <span>元素高度未知</span>
+        </div>
+    </div> -->
+    <!-- 利用flex布局实现垂直居中(元素高度未知也适用) -->
+    <div class="box box1">
+        <div class="child3">利用flex实现垂直居中</div>
+    </div>
+</body>
+</html>
