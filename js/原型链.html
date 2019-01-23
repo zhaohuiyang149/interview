@@ -39,7 +39,7 @@
 
         console.log('a4', a4)    // say属性在a2的原型链上
 
-        // instanceof：在该实例对象的原型链上进行查找，直到找到Object.prototype，若有，则返回true，否次为false
+        // instanceof：在该实例对象的原型链上进行查找，直到找到Object.prototype，若有，则返回true，否次为false (故可以用来判定arr是否为一个数组)
         
         console.log('instanceof在原型链上进行查找', a2 instanceof Fun)      // true
         console.log('instanceof在原型链上进行查找', a2 instanceof Object)    // true
@@ -51,7 +51,11 @@
         console.log('constructor不会在原型链上进行查找', a2.constructor === Fun)      // true
         console.log('constructor不会在原型链上进行查找', a2.constructor === Object)    // false
         
-        // 模拟一个new运算符创建对象的整个过程
+        // 模拟一个new运算符创建对象的整个过程 
+        // 步骤1：一个新对象实例被创建，它继承构造函数Fun的prototype；
+        // 步骤2：构造函数Foo被执行。执行的时候，相应的参数会被传入，同时上下文（this）会被指向这个新对象实例。new Foo等同于new Foo()，若不加括号，则只能用在不传递任何参数的情况中。
+        // 步骤3：如果构造函数返回了一个“对象”，那么这个对象会取代整个 new 出来的结果。如果构造函数没有返回对象，那么 new 出来的结果即为步骤1中创建的对象。
+
         var new2 = function (Fun) {
             var obj = Object.create(Fun.prototype)
             var newobj = Fun.call(obj)

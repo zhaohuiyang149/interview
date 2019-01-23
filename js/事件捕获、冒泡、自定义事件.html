@@ -73,13 +73,13 @@
 
         // 自定义事件(无参数)
     
-        // var event = new Event('custom')
-        // eve.addEventListener('custom', function() {
-        //     console.log('custom event')
-        // })
-        // setTimeout(function() {
-        //     eve.dispatchEvent(event)
-        // }, 2000)
+        var event = new Event('custom')
+        eve.addEventListener('custom', function() {
+            console.log('custom event')
+        })
+        setTimeout(function() {
+            eve.dispatchEvent(event)
+        }, 2000)
 
         // 自定义事件（有参数）
 
