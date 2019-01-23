@@ -6,15 +6,36 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>setTimeout函数</title>
 </head>
-<body></body>
+<body>
+    <section>
+        <article>
+            <h1>setTimeout函数定义、参数：</h1>
+            <p>(1) setTimeout函数用来指定某个函数或某段代码，在多少毫秒之后执行。它返回一个整数，表示定时器的编号，以后可以用来取消这个定时器。</p>
+            <p>(2) setTimeout函数接受两个参数，第一个参数func|code是将要推迟执行的函数名或者一段代码，第二个参数delay是推迟执行的毫秒数。<br>
+                <em>需要注意的是，推迟执行的代码必须是以字符串的形式，放入setTimeout。若延迟执行的是函数，则直接放入函数名，如果需要带参数，则需要加''，将其转化为字符串。</em>
+            </p>
+            <p>(3) 除了前两个参数，setTimeout还允许添加更多的参数。它们将被传入推迟执行的函数（回调函数）</p>
+            <p>(4) 如果被setTimeout推迟执行的回调函数是某个对象的方法，那么该方法中的this关键字将指向全局环境，而不是定义时所在的那个对象。</p>
+        </article>
+        <article>
+            <h1>setTimeout运行机制：</h1>
+            <p>(1) setTimeout和setInterval的运行机制是，将指定的代码移出本次执行，等到下一轮Event Loop时，再检查是否到了指定时间。如果到了，就执行对应的代码；如果不到，就等到再下一轮Event Loop时重新判断。这意味着，setTimeout指定的代码，必须等到本次执行的所有代码都执行完，才会执行。</p>
+            <p>(2) 每一轮Event Loop时，都会将“任务队列”中需要执行的任务，一次执行完。setTimeout和setInterval都是把任务添加到“任务队列”的尾部。因此，它们实际上要等到当前脚本的所有同步任务执行完，然后再等到本次Event Loop的“任务队列”的所有任务执行完，才会开始执行。由于前面的任务到底需要多少时间执行完，是不确定的，所以没有办法保证，setTimeout和setInterval指定的任务，一定会按照预定时间执行。</p>
+        </article>
+        <article>
+            <h1>定时器清空：</h1>
+            <p>setTimeout和setInterval函数，都返回一个表示计数器编号的整数值，将该整数传入clearTimeout和clearInterval函数，就可以取消对应的定时器。</p>
+        </article>
+    </section>
+</body>
 <script>
     // function fun (fun1, timer, interval) {
     //     // 方法一
-    //     for(let i = 0; i < timer; i++) {
-    //         setTimeout(function() {
-    //             fun1()
-    //         }, interval*i)
-    //     }
+    //     // for(let i = 0; i < timer; i++) {
+    //     //     setTimeout(function() {
+    //     //         fun1()
+    //     //     }, interval*i)
+    //     // }
     //     // 方法二
     //     var i = 0
     //     var setTime = setInterval(() => {
@@ -31,31 +52,243 @@
     // }
     // fun(fun1, 4, 3000)
 
-    // xiaomi
-
+    // test 1
     // for(var i = 0; i < 5; i++) {
     //     console.log(i)
     // }
 
-    // 打印输出： 0 1 2 3 4
 
+    // test 2
     // for(var i = 0; i < 5; i++) {
     //     setTimeout(() => {
     //         console.log(i)
-    //     }, 1000*i);
+    //     }, 1000 * i);
     // }
 
-    // 打印输出： 5 （1秒之后） 5  （1秒之后） 5 （1秒之后） 5 （1秒之后） 5
 
-    for(var i = 0; i< 5; i++) {
-        (function(i) {
-            console.log(i)
-            setTimeout((i) => {
-                console.log(i)
-            }, i * 1000)
-        })(i)
-    }
+    // test 3
+    // for(var i = 0; i < 5; i++) {
+    //     (function(i) {
+    //         console.log(i)
+    //     })(i)
+    // }
 
-    // 打印输出： undefined （1秒之后） undefined  （1秒之后） undefined （1秒之后） undefined （1秒之后） undefined
+    // test 3等同于下式：
+    // for(var i = 0; i < 5; i++) {
+    //     fun(i)
+    // }
+    // function fun (i) {
+    //     console.log(i)
+    // }
+
+
+    // test 4
+    // for(var i = 0; i < 5; i++) {
+    //     (function(i) {
+    //         setTimeout(function () {
+    //             console.log(i)
+    //         })
+    //     })(i)
+    // }
+
+    // test 4等同于下式：
+    // for(var i = 0; i < 5; i++) {
+    //     fun(i)
+    // }
+
+    // function fun (i) {
+    //     setTimeout(function() {
+    //         console.log(i)
+    //     })
+    // }
+
+    // test 5
+    // for (var i = 0; i < 5; i++) {
+    //     (function(i) {
+    //         setTimeout(function () {
+    //             console.log(i)
+    //         }, i * 1000 )
+    //     })(i)
+    // }
+
+    // test 5等同于下式：
+
+    // for(var i = 0; i < 5; i++) {
+    //     fun(i)
+    // }
+    // function fun (i) { 
+    //     setTimeout(function() {
+    //         console.log(i)
+    //     }, i * 1000)
+    // }
+
+
+    // test 6
+    // for (var i = 0; i < 5; i++) {
+    //     let j = i
+    //     setTimeout(function () {
+    //         console.log(j)
+    //     }, i * 1000)
+    // }
+
+
+    // test 7
+    // for(var i = 0; i < 5; i++) {
+    //     (function() {
+    //         setTimeout(() => {
+    //             console.log(i)
+    //         }, i * 1000)
+    //     })(i)
+    // }
+
+    // test 7等同于下式：
+    // for(var i = 0; i < 5; i++) {
+    //     fun(i)
+    // }
+
+    // function fun () {
+    //     setTimeout(function() {
+    //         console.log(i)
+    //     }, i * 1000)
+    // }
+
+
+    // test 8
+    // for (var i = 0; i < 5; i++) {
+    //     (function() {
+    //         setTimeout(function () {
+    //             console.log(i)
+    //         }, i * 1000 )
+    //     })()
+    // }
+
+    // test 8等同于下式：
+    // for(var i = 0; i < 5; i++) {
+    //     fun()
+    // }
+
+    // function fun () {
+    //     setTimeout(function() {
+    //         console.log(i)
+    //     }, i * 1000)
+    // }
+
+
+    // test 9
+    // for (var i = 0; i < 5; i++) {
+    //     (function() {
+    //         var j = i
+    //         setTimeout (function () {
+    //             console.log(j)
+    //         }, i * 1000 )
+    //     })()
+    // }
+
+    // test 9等同于下式：
+    // for(var i = 0; i < 5; i++) {
+    //     fun()
+    // }
+
+    // function fun () {
+    //     var j = i
+    //     setTimeout(function() {
+    //         console.log(j)
+    //     }, i * 1000)
+    // }
+
+    
+    // test 10
+    // for(var i = 0; i< 5; i++) {
+    //     (function(i) {
+    //         setTimeout((i) => {
+    //             console.log(i)
+    //         }, i * 1000)
+    //     })(i)
+    // }
+
+    // test 10等同于下式：
+    // for(var i = 0; i < 5; i++) {
+    //     fun(i)
+    // }
+
+    // function fun (i) {
+    //     setTimeout((i) => {
+    //         console.log(i)
+    //     }, i * 1000)
+    // }
+    
+
+    // test 11
+    // for (var i = 0; i < 5; i++) {
+    //     setTimeout((function(i) {
+    //         console.log(i)
+    //     })(i), i * 1000);
+    // }
+    
+    // test 11等同于下式：
+    // for(var i = 0; i < 5; i++) {
+    //     setTimeout(fun(i), i * 1000)
+    // }
+
+    // function fun (i) {
+    //     console.log(i)
+    // }
+
+    // test 12：
+    // for(var i = 0; i < 5; i++) {
+    //     setTimeout('fun(i)', i * 1000)
+    // }
+
+    // function fun (i) {
+    //     console.log(i)
+    // }
+
+
+    // test 13：
+    // for(var i = 0; i < 5; i++) {
+    //     fun(i)
+    // }
+
+    // function fun (i) {
+    //     setTimeout((i) => {
+    //         console.log(i)
+    //     }, i * 1000, i)
+    // }
+
+    // test 1打印输出： 0 1 2 3 4
+    // test 2打印输出： 5 （1秒之后） 5  （1秒之后） 5 （1秒之后） 5 （1秒之后） 5
+    // test 3打印输出： 0 1 2 3 4
+    // test 4打印输出： 0 1 2 3 4
+    // test 5打印输出：   0 （1秒之后） 1  （1秒之后） 2 （1秒之后） 3 （1秒之后）  4
+    // test 6打印输出：   0 （1秒之后） 1  （1秒之后） 2 （1秒之后） 3 （1秒之后）  4
+    // test 7打印输出：   5 （1秒之后） 5  （1秒之后） 5 （1秒之后） 5 （1秒之后）  5
+    // test 8打印输出：   5 （1秒之后） 5  （1秒之后） 5 （1秒之后） 5 （1秒之后）  5
+    // test 9打印输出：   0 （1秒之后） 1  （1秒之后） 2 （1秒之后） 3 （1秒之后）  4
+    // test 10打印输出： undefined （1秒之后） undefined  （1秒之后） undefined （1秒之后） undefined （1秒之后） undefined
+    // test 11打印输出：   0 1 2 3 4
+    // test 12打印输出：   5 （1秒之后） 5  （1秒之后） 5 （1秒之后） 5 （1秒之后）  5
+    // test 13打印输出：   0 （1秒之后） 1  （1秒之后） 2 （1秒之后） 3 （1秒之后）  4
+
+    // setTimeout执行顺序：
+
+    // setTimeout(function() {
+    //     console.log("Timeout");
+    // }, 0);
+
+    // function a(x) {
+    //     console.log("a() 开始运行");
+    //     b(x);
+    //     console.log("a() 结束运行");
+    // }
+
+    // function b(y) {
+    //     console.log("b() 开始运行");
+    //     console.log("传入的值为" + y);
+    //     console.log("b() 结束运行");
+    // }
+
+    // console.log("当前任务开始");
+    // a(42);
+    // console.log("当前任务结束");
 </script>
 </html>
