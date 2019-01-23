@@ -6,15 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>array的原型链</title>
 </head>
-<body></body>
+<body>
+    <section>
+        <article>
+            <h1>判断是否为数组：</h1>
+            <p>Array.isArray(arr)</p>
+            <p>arr instanceof Array</p>
+            <p>arr.constructor === Array</p>
+        </article>
+        <article>
+            <h1>数组的原型链：</h1>
+            <p>arr instanceof Array</p>
+            <p>arr.__proto__.__proto__</p>
+        </article>
+        <article>
+            <h1>普通对象的原型链：</h1>
+            <p>obj instanceof Object</p>
+            <p>obj.constructor === Object</p>
+            <p>obj.__proto__</p>
+        </article>
+    </section>
+</body>
 <script>
     var arr = [1,3]
     console.log('arr', arr)
     console.log('arr[1]', arr[1])
-    console.log('原型链', arr.__proto__)    // []
-    console.log(arr instanceof Array)     // true
-    console.log(Array.isArray(arr))        // true
-    console.log(arr.constructor === Array)    // true
+    console.log('原型链', arr.__proto__)    // 
+    console.log(arr instanceof Array)     // true，此方法可以判断arr是否为数组
+    console.log(Array.isArray(arr))        // true，此方法可以判断arr是否为数组
+    console.log(arr.constructor === Array)    // true，此方法可以判断arr是否为数组（仅限于简单数组）
     console.log('new Array', new Array())
     console.log(Object.prototype.toString())     //  [object object]
     console.log(Object.prototype.toString.apply(arr) === '[object Array]')    // true
