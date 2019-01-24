@@ -34,7 +34,7 @@
     console.log('原型链', arr.__proto__)    // 
     console.log(arr instanceof Array)     // true，此方法可以判断arr是否为数组
     console.log(Array.isArray(arr))        // true，此方法可以判断arr是否为数组
-    console.log(arr.constructor === Array)    // true，此方法可以判断arr是否为数组（仅限于简单数组）
+    console.log(arr.constructor === Array)    // true，此方法可以判断arr是否为数组
     console.log('new Array', new Array())
     console.log(Object.prototype.toString())     //  [object object]
     console.log(Object.prototype.toString.apply(arr) === '[object Array]')    // true
