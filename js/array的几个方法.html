@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>reduce、map方法</title>
+    <title>reduce、map、filter方法</title>
 </head>
 <body>
     <section>
         <article>
             <h1>reduce() 方法</h1>
             <p>(1)reduce中回调函数有四个参数，prev：第一项的值或者上一次叠加的结果，cur：当前会参与叠加的项，index：当前值的索引，arr：数组本身</p>
-            <p>(2)若reduce没有参数，数组的遍历从第二项开始，第一项的值被当做初始值处理；若有参数，则数组的遍历从第一项开始，参数被当做初始值处理。</p>
-
+            <p>(2)若reduce只有一个参数，数组的遍历从第二项开始，第一项的值被当做初始值处理；若有第二个参数，则第二个参数为设置prev的初始类型和初始值，数组的遍历从第一项开始，参数被当做初始值处理。</p>
+            <p>(3)应用实例：计算一串字符串中每个字母出现的次数</p>
+        </article>
+        <article>
+            <h1>map() 方法</h1>
+            <p>(1)</p>
         </article>
     </section>
     <script>
@@ -30,6 +34,52 @@
             return prev + cur.score
         }, -10)
         console.log('sum2', sum2)
+
+        // 若在成绩中增加每科成绩权重，最后计算出总分数，如下：
+        var dis = {chinese: 0.5, math: 0.3, english: 0.2}
+        var sum3 = arr2.reduce((prev, cur) => {
+            return prev + cur.score * dis[cur.subject]
+        }, 0)   // 传入参数：0，表示prev的初始值为number类型
+        console.log('sum3', sum3)
+
+        // 应用题：如何知道一串字符中每个字母出现的次数
+        function times (str) {
+            var arr = str.split('')
+            var result = {}
+            arr.reduce((prev, cur) => {
+                prev[cur] ? prev[cur]++ : prev[cur] = 1
+                result = prev
+                return prev
+            }, result)
+            return result
+        }
+
+        // map()方法
+        var arr3 = [1,2,3,4,5]
+        var result3 = arr3.map(item => item * item)
+        var result4 = arr3.map(fun)
+            
+        function fun (item) {
+            return item * 5
+        }
+        var obj1 = {array: []}
+        var result5 = arr3.map((cur, index, arr) => {
+            console.log(cur, index, arr)
+            console.log('this', this.array)
+            return cur * 2
+        }, obj1)
+
+        // 使用map重新格式化数组中的对象
+        var arr4 = [{id: 'id001', value: 10}, {id: 'id002', value: 20}, {id: 'id003', value: 30}]
+        
+        var result6 = arr4.map((item) => {
+            var obj = {}
+            obj[item.id] = item.value
+            return obj
+        })
+        console.log(result6)    // [{id001: 10}, {id002: 20}, {id003: 30}]
+
+        // 用数组的reduce方法实现map方法
     </script>
 </body>
 </html>
