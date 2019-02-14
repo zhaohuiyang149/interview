@@ -10,19 +10,26 @@
     <section>
         <article>
             <h1>reduce() 方法</h1>
-            <p>(1)reduce中回调函数有四个参数，prev：第一项的值或者上一次叠加的结果，cur：当前会参与叠加的项，index：当前值的索引，arr：数组本身</p>
-            <p>(2)若reduce只有一个参数，数组的遍历从第二项开始，第一项的值被当做初始值处理；若有第二个参数，则第二个参数为设置prev的初始类型和初始值，数组的遍历从第一项开始，参数被当做初始值处理。</p>
-            <p>(3)应用实例：计算一串字符串中每个字母出现的次数</p>
+            <p>(1)用法：array.reduce(function(prev, cur, index, array) { return *** }, initialValue)</p>
+            <p>(2)其中 prev：第一项的值或者上一次叠加的结果，cur：当前会参与叠加的项，index：当前值的索引，arr：数组本身</p>
+            <p>(3)若initialValue无值，则数组的遍历从第二项开始，第一项的值被当做初始值处理；若initialValue无值，则initialValue为设置prev的初始类型和初始值，数组的遍历从第一项开始，initialValue被当做初始值处理。</p>
+            <p>(4)应用实例：计算一串字符串中每个字母出现的次数</p>
         </article>
         <article>
             <h1>map() 方法</h1>
-            <p>(1)</p>
+            <p>(1)用法：array.map(function(cur, index, array) { return *** }, thisArg)，此处，index，array，thisArg 是可选参数，thisArg为执行回调时中的this指向。此处注意：箭头函数普通函数的区别</p>
+            <p>(2)用途：使用map格式化数组中的对象</p>
+        </article>
+        <article>
+            <h1>filter() 方法</h1>
+            <p>(1)用法：array.filter(function(cur, index, array) { return *** }, thisArg)，此处index, array, thisArg 是可选参数，thisArg为执行回调时使用，传递给函数，用作 this 的值。此处注意：箭头函数普通函数的区别</p>
+            <p>(2)用途：array去重</p>
         </article>
     </section>
     <script>
         var arr1 = [1, 8, 6, 14, 5]
         var sum1 = arr1.reduce((prev, cur, index, arr) => {
-            console.log(prev, cur, index, arr)
+            // console.log(prev, cur, index, arr)
             return prev + cur
         })
         console.log('sum1', sum1)        // 34
@@ -30,7 +37,7 @@
 
         var arr2 = [{subject: 'chinese', score: 80}, {subject: 'math', score: 90}, {subject: 'english', score: 85}]
         var sum2 = arr2.reduce((prev, cur) => {
-            console.log(prev, cur)
+            // console.log(prev, cur)
             return prev + cur.score
         }, -10)
         console.log('sum2', sum2)
@@ -64,22 +71,50 @@
         }
         var obj1 = {array: []}
         var result5 = arr3.map((cur, index, arr) => {
-            console.log(cur, index, arr)
-            console.log('this', this.array)
+            console.log('this', this)        // 此处的this指向的是：window，注意箭头函数与普通函数的区别
             return cur * 2
         }, obj1)
+
+        // test2
+        var obj2 = {array: []}
+        var result6 = arr3.map(function(cur, index, arr) {
+            // console.log('this', this)              // 此处的this指向的是：obj2，注意箭头函数与普通函数的区别
+            return cur * 3
+        }, obj2)
 
         // 使用map重新格式化数组中的对象
         var arr4 = [{id: 'id001', value: 10}, {id: 'id002', value: 20}, {id: 'id003', value: 30}]
         
-        var result6 = arr4.map((item) => {
+        var result7 = arr4.map((item) => {
             var obj = {}
             obj[item.id] = item.value
             return obj
         })
-        console.log(result6)    // [{id001: 10}, {id002: 20}, {id003: 30}]
+        console.log(result7)    // [{id001: 10}, {id002: 20}, {id003: 30}]
 
-        // 用数组的reduce方法实现map方法
+        // filter
+        var arr5 = [2,3,5,8,9]
+        var result8 = arr5.filter(function(cur, index, arr) {
+            // console.log(cur, index, arr)
+            return cur > 5
+        })
+
+        console.log('result8', result8)
+
+        // filter 中的thisArg
+        var obj3 = {}
+        var result9 = arr5.filter((cur) => {        // 回调函数若为箭头函数，则此处传入回调函数的thisArg不生效，若为普通函数，则回调函数内部的this为thisArg
+            // console.log('this', this)             // 此处的this为window
+            return cur > 4
+        }, obj3)
+
+        // filter例子：
+        // test1: 数组去重
+        var arr6 = [12,4,6,8,0,14,12,6,8,9,13,4,0,8,9]
+        var result10 = arr6.filter((item, index) => {
+            return arr6.indexOf(item) === index
+        })
+        console.log('result10', result10)
     </script>
 </body>
 </html>

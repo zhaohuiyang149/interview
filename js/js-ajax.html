@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js简单封装ajax</title>
+    <script src="ajax.js"></script>
+</head>
+<body>
+    <section>
+        <article>
+            <h1>js简单封装ajax步骤如下：</h1>
+            <ul>
+                <li>生成 XMLHttpRequest 对象：var xhr = new XMLHttpRequest()，注意：要考虑ie的兼容性问题，IE6 不支持XMLHttpRequest</li>
+                <li>配置 XMLHttpRequest 对象：xhr.open(method, url, true)</li>
+                <li>发送请求：xhr.send()</li>
+                <li>监听 XMLHttpRequest 对象：xhr.onreadystatchange() 或者 xhr.onload()，若 xhr 的 readyState 为 4 并且 status 为 200 或者 304，callback(xhr.responseText)， 否则，报错</li>
+            </ul>            
+        </article>
+        <article>
+            <h1>例子如下：</h1>
+            <input type="text" id="text">
+            <button id="ajaxGet">get请求</button>
+            <button id="ajaxPost">post请求</button>
+        </article>
+    </section>
+</body>
+<script>
+(function(){  
+    var ajaxGetBtn = document.getElementById('ajaxGet')
+    var ajaxPostBtn = document.getElementById('ajaxPost')
+    var text = document.getElementById('text')
+    ajaxGetBtn.onclick = function() {
+        var data = {
+            value: text.value
+        }
+        // 调用方法一：
+        var ajax = new Ajax({      //新建Ajax对象，传入所需数据
+            method: 'get',      //设置ajax方法
+            url: 'http://localhost:3001',    //设置通讯地址
+            callback: function(res){    //设置回调函数
+                console.log('get res:', res)
+            },
+            data: data  //需要传递的数据
+        });
+        ajax.send()
+        // 调用方法二：
+        // var ajax = new Ajax({})
+        // var fun = function (res) {}
+        // ajax.send('get', 'http://localhost:3001', fun, data)
+    }
+    ajaxPostBtn.onclick = function() {
+        var data = {
+            value: text.value
+        };
+        var ajax = new Ajax({
+            method: 'post',
+            url: 'http://localhost:3001',
+            callback: function(res) {
+                console.log('post res:', res)
+            },
+            data: data
+        })
+        ajax.send()
+    }
+})();
+</script>
+</html>

@@ -31,11 +31,9 @@
 <script>
     // function fun (fun1, timer, interval) {
     //     // 方法一
-    //     // for(let i = 0; i < timer; i++) {
-    //     //     setTimeout(function() {
-    //     //         fun1()
-    //     //     }, interval*i)
-    //     // }
+    //     for(let i = 0; i < timer; i++) {
+    //         setTimeout(fun1, interval*i)
+    //     }
     //     // 方法二
     //     var i = 0
     //     var setTime = setInterval(() => {
@@ -271,24 +269,24 @@
 
     // setTimeout执行顺序：
 
-    // setTimeout(function() {
-    //     console.log("Timeout");
-    // }, 0);
+    setTimeout(function() {
+        console.log("Timeout");
+    }, 0);
 
-    // function a(x) {
-    //     console.log("a() 开始运行");
-    //     b(x);
-    //     console.log("a() 结束运行");
-    // }
+    function a(x) {
+        console.log("a() 开始运行");
+        b(x);
+        console.log("a() 结束运行");
+    }
 
-    // function b(y) {
-    //     console.log("b() 开始运行");
-    //     console.log("传入的值为" + y);
-    //     console.log("b() 结束运行");
-    // }
+    function b(y) {
+        console.log("b() 开始运行");
+        console.log("传入的值为" + y);
+        console.log("b() 结束运行");
+    }
 
-    // console.log("当前任务开始");
-    // a(42);
-    // console.log("当前任务结束");
+    console.log("当前任务开始");
+    a(42);
+    console.log("当前任务结束");
 </script>
 </html>

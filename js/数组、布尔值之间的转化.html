@@ -6,7 +6,37 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>array、object、boolean</title>
 </head>
-<body></body>
+<body>
+    <section>
+        <article>
+            <h1>valueOf()</h1>
+            <p>(1) valueOf()用于返回给定参数的原生 Number 对象值，参数可以是原生数据类型，string等</p>
+        </article>
+        <article>
+            <h1>全等比较： === </h1>
+            <p>(1) 若两个值类型不相同，则他们不相等;</p>
+            <p>(2) 若两个值都是null或者undefined，则他们相等;</p>
+            <p>(3) 若两个值都是true或都是false，则他们相等;</p>
+            <p>(4) 若其中一个值是NaN，或者两个值都是NaN，则他们不相等。NaN和其他任何值都不相等，包括其本身！ 通过x!==x来判断NaN，只有在x为NaN的时候，这个表达式的值才为true。</p>
+            <p>(5) 若两个是数字且数值相等，则他们相等。如果一个为0，另一个为-0，则他们同样相等;</p>
+            <p>(6) 若两个值为字符串，且所含的对应位上的数值也完全相等。则他们相等;</p>
+            <p>(7) 若两个引用值指向同一个对象、数组或函数，则他们是相等的。若指向不同的对象，则他们不等，即便两个对象具有完全一样的属性</p>
+        </article>
+        <article>
+            <h1>非全等比较：== </h1>
+            <p>(1) 若两个操作数类型相同，若值不相等，则不相等。反则相等;</p>
+            <p>(2) 若两个操作数类型不同，若检测相等，则需要遵循以下规则: 
+                <ul>
+                    <li>若一个值为null，另一个为undefined，则他们相等</li>
+                    <li>若一个值为数字，另一个是字符串，则会先将字符串转换为数字，然后使用转后的值进行比较</li>
+                    <li>若其中一个值为true，则将其转换为1再进行比较。若其中一个为false，则转为0再进行比较</li>
+                    <li>若一个值是对象，另一个值是数字或字符串，则会使用valueOf()，再尝试使用toString()，除了日期类，日期类只使用toString()转换</li>
+                    <li>其他不同类型之间的比较均不相等</li>
+                </ul>
+            </p>
+        </article>
+    </section>
+</body>
 <script>
 if ([] == false) console.log('1')
 if ({} == false) console.log('2')
@@ -14,5 +44,11 @@ if ([]) console.log('3')
 if ([1] == [1]) console.log('4')
 
 // 打印结果为： 1  3
+var obj = { name: 'aa' }
+
+var a = obj
+var b = obj
+
+console.log ( a === b)           // true
 </script>
 </html>
