@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>call、apply、bind 的区别</title>
+</head>
+<body>
+    <section>
+        <article>
+            <h1>apply、call、bind 的共同点：</h1>
+            <p>三者都是用来改变函数的 this 对象的指向；</p>
+            <p>三者的第一个参数都是 this 要指向的对象，也就是想指定的上下文。</p>
+            <p>三者都可以利用后续参数传参。</p>
+        </article>
+        <article>
+            <h1>apply、call、bind 的区别：</h1>
+            <p>bind 是返回对应的函数，apply 和 bind 则是直接调用</p>
+            <p>apply 的语法：a.fun.apply(b, [parmas1, params2, params3])</p>
+            <p>call 的语法：a.fun.call(b, params1, params2, params3)</p>
+            <p>bind 的语法：a.fun.bind(b)(params1, params2, params3) 或者 a.fun.bind(b, params1, params2, params3)()</p>
+        </article>
+    </section>
+</body>
+<script>
+    var a = {
+        name: 'aa',
+        age: '10',
+        fun: function (job, place) {
+            console.log(this.name, this.age, job, place)
+        }
+    }
+    var b = {
+        name: 'bb',
+        age: 20
+    }
+    console.log(a.fun('student', 'beijing'))          // aa 10 student beijing
+    console.log(a.fun.apply(b, ['student1', 'shanghai']))       // bb 20 student1 shanghai
+    console.log(a.fun.call(b, 'student2', 'henan'))            // bb 20 student2 henan
+    console.log(a.fun.bind(b)('student3', 'shenzhen'))         // bb 20 student3 shenzhen
+</script>
+</html>
