@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>proxy 的用途</title>
+</head>
+<body>
+    <section>
+        <article>
+            <p>实现bindData函数</p>
+        </article>
+    </section>
+    <section>
+        <article>
+            <button id="changeName">改变 name 值</button>
+            <button id="getName">获取 name 值</button>
+            <button id="setSex">设置 sex 值</button>
+        </article>
+    </section>
+</body>
+<script>
+    // 小米：实现bindData函数
+    var person = {
+        name: 'admin',
+        age: 24
+    }
+    var onchange = function () {
+        console.log('person 变化了')
+    }
+
+    // bindData(person, onchange)
+
+    // function bindData (obj, fun) {
+        person = new Proxy(person, {
+            get: function (target, key, receiver) {
+                console.log('获取：', target, key, receiver)
+            },
+            set: function (target, key, value, receiver) {
+                console.log('设置：', target, key, value, receiver)
+                onchange()
+            }
+        })
+    // }
+
+    var btn = document.getElementById('changeName')
+    btn.onclick = function() {
+        person.name = 'wq'
+    }
+    document.getElementById('getName').onclick = function () {
+        var name = person.name
+    }
+
+    let obj = {
+        name: 'aaa',
+        age: 3
+    }    
+    let proxy1 = new Proxy(obj, {
+        get (target, prototype) {
+            if (target[prototype]) {
+                return target[prototype]
+            } else {
+                return '该属性不存在'
+            }
+        }
+    })
+    console.log('name:', proxy1.name)       // name: aaa
+    console.log('job:', proxy1.job)        //  job: 该属性不存在
+    let proxy2 = Object.create(proxy1)    // 可以实现继承
+
+    let proxy3 = new Proxy(obj, {
+        set: function(target, key, value) {
+            if (key === 'sex') {
+                if (!(value === 'man' || value === 'women')) {
+                    throw new Error('输入的性别有误~~') 
+                } else {
+                    obj[key] = value
+                    console.log('属性设置成功')
+                }
+            }
+        }
+    })
+    document.getElementById('setSex').onclick = function () {
+        // proxy3.sex = 'bbb'         // 报错，输入的性别有误~~
+        proxy3.sex = 'man'         // 属性设置成功
+    }
+</script>
+</html>

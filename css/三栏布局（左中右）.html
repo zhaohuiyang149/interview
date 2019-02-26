@@ -16,7 +16,7 @@
     /* .layout article div {
         min-height: 300px;
     } */
-    .layout.float .left {
+    /* .layout.float .left {
         float: left;
         width: 300px;
         background-color: aqua;
@@ -28,7 +28,7 @@
     }
     .layout.float .center {
         background-color: beige;
-    }
+    } */
     /* .layout.absolute .left {
         position: absolute;
         left: 0;
@@ -47,7 +47,7 @@
         right: 300px;
         background-color: beige;
     } */
-    /* .layout.flexbox {
+    .layout.flexbox {
         margin-top: 340px;
     }
     .layout.flexbox article {
@@ -64,7 +64,7 @@
     .layout.flexbox .center {
         flex: 1;
         background-color:beige;
-    } */
+    }
     /* .layout.table .left-right-center {
         width: 100%;
         display: table;
@@ -101,7 +101,7 @@
 </head>
 <body>
     <!-- 假设高度已知，请写出三栏布局，其中左栏、右栏宽度为300px，中间自适应。 五种方案：1、浮动；2、绝对定位 3、flex布局 4、table布局 5、grid布局-->
-    <section class="layout float">
+    <!-- <section class="layout float">
         <article class="left-right-center">
             <div class="left">这是三栏布局中的左侧部分</div>
             <div class="right">这是三栏布局中的右侧部分</div>
@@ -112,7 +112,7 @@
                 <p>3.这是三栏布局中的中间部分</p>
             </div>
         </article>
-    </section>
+    </section> -->
      <!-- <section class="layout absolute">
         <article class="left-right-center">
             <div class="left">这是三栏布局中的左侧部分</div>
@@ -125,7 +125,7 @@
             <div class="right">这是三栏布局中的右侧部分</div>
         </article>
     </section> -->
-    <!-- <section class="layout flexbox">
+    <section class="layout flexbox">
         <article class="left-right-center">
             <div class="left">这是三栏布局中的左侧部分</div>
             <div class="center">
@@ -136,7 +136,7 @@
             </div>
             <div class="right">这是三栏布局中的右侧部分</div>
         </article>
-    </section> -->
+    </section>
     <!-- <section class="layout table">
         <article class="left-right-center">
             <div class="left">这是三栏布局中的左侧部分</div>

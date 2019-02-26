@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>forEach、for...in、for...of优缺点</title>
+</head>
+<body>
+    <section>
+        <article>
+            <h1>forEach 优缺点</h1>
+            <p>中途无法跳出 forEach 循环，break 命令也不能用 return 语句从闭包函数中返回。</p>
+        </article>
+        <article>
+            <h1>for...in</h1>
+            <p>可以循环遍历对象的键名，不适合于循环遍历数组</p>
+        </article>
+        <article>
+            <h1>for...of</h1>
+            <p>可以和break、continue 和 return 配合使用</p>
+        </article>
+    </section>
+</body>
+<script>
+var arrObj = [{name: 'aa', id: 'id001'}, {name: 'bb', id: 'id002'}]
+var obj = {name: 'obj', id: 'id003'}
+var arr = [1,2,3,4,5]
+
+arrObj.forEach((item)=> {
+    console.log('item', item)
+})
+
+for(var item in obj) {
+    console.log('for..in', item)       // name   id
+}
+
+for(var num of arr) {
+    if (num > 3) break
+    console.log('for...of', num)
+}
+</script>
+</html>

@@ -21,6 +21,23 @@
             <p>call 的语法：a.fun.call(b, params1, params2, params3)</p>
             <p>bind 的语法：a.fun.bind(b)(params1, params2, params3) 或者 a.fun.bind(b, params1, params2, params3)()</p>
         </article>
+        <article>
+            <h1>用原生 js 实现 call、apply 的步骤：</h1>
+            <ul>
+                <li>在 this 指向的新的对象上添加 fun 函数，从而达到改变 fun 函数中 this 的指向问题；</li>
+                <li>获取到 this 指向的新对象，在新对象上添加 fun 函数；</li>
+                <li>通过 eval 将字符串转变为 js 语法去执行；</li>
+                <li>删除新对象上添加的 fun 函数。</li>
+            </ul>
+        </article>
+        <article>
+            <h1>用原生 js 实现 bind 的步骤：</h1>
+            <ul>
+                <li>该函数返回的是一个函数 fun，而非执行之后的函数的结果；</li>
+                <li>在返回的 fun 中，改变 fun 中 this 的指向，将指向转变为传入该函数的第一个参数；</li>
+                <li>需要注意的是：bind 的语法有两种情况，所以返回的 fun 函数中，参数的情况也有两种。</li>
+            </ul>
+        </article>
     </section>
 </body>
 <script>
@@ -84,27 +101,26 @@
     funb.applyfun(aa, ['apply', 20])
 
     // 用原生js实现bind
-
-    // Function.prototype.bindfun = function(that){
+    // Function.prototype.bindfun = function(that) {
     //     var _this = this,
     //         slice = Array.prototype.slice,
     //         args = slice.apply(arguments,[1]),
     //         fNOP = function () {},
     //         bound = function(){
     //             //这里的this指的是调用时候的环境
-    //             return _this.apply(this instanceof  fNOP ?　this : that||window,
+    //             return _this.apply(this instanceof  fNOP ?　this : that || window,
     //                 args.concat(Array.prototype.slice.apply(arguments,[0]))
     //             )
     //         } 
     //         var aa = args.concat(Array.prototype.slice.apply(arguments,[0]))
-    //         console.log(aa)   
     //     fNOP.prototype = _this.prototype;
     
     //     bound.prototype = new fNOP();
     
     //     return bound;
     // }
-
+    
+    // 用原生js实现bind
     Function.prototype.bindfun = function () {
         var obj = arguments[0]
         var arr = []
@@ -113,11 +129,13 @@
         }
         var _this = this
         var bound = function () {
-            return _this.apply(obj || window, arr)
+            var params = arr.length ? arr : [...arguments]
+            return _this.apply(obj || window, params)
         }
         return bound
     }
-    // funb.bindfun(aa)('bind', 30)    // 此种不适用 😂
-    funb.bindfun(aa, 'bind', 30)()
+
+    funb.bindfun(aa)('bind', 30)
+    // funb.bindfun(aa, 'bind', 30)()
 </script>
 </html>
